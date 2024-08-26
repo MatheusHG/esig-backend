@@ -22,6 +22,15 @@ class UserTypeController {
 
     return response.status(200).json({ message: 'OK', data: { type } });
   }
+
+  async findAll(request: Request, response: Response) {
+    const userTypeRepository = new UserTypeRepository(AppDataSource);
+    const service = new UserTypeService(userTypeRepository);
+
+    const result = await service.findAll();
+
+    return response.status(200).json({ message: 'OK', data: result });
+  }
 }
 
 export default new UserTypeController();

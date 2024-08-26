@@ -19,4 +19,8 @@ export class UserTypeRepository {
   async findByType(name: string): Promise<UserType | null> {
     return await this.repo.findOne({ where: { type: name } });
   }
+
+  async findAll(): Promise<UserType[]> {
+    return await this.repo.find();
+  }
 }

@@ -6,5 +6,6 @@ const router = Router();
 
 router.post('/', UserController.handle);
 router.post('/create-type', UserTypeController.handle);
+router.get('/create-type', UserTypeController.findAll);
 
 export default router;

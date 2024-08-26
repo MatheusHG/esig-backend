@@ -21,4 +21,8 @@ export class UserTypeService {
 
     return newUser;
   }
+
+  async findAll(): Promise<UserType[]> {
+    return this.userTypeRepository.findAll();
+  }
 }
