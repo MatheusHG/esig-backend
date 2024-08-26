@@ -26,4 +26,19 @@ export class UserService {
 
     return newUser;
   }
+
+  async login(email: string, password: string): Promise<User | Error> {
+    const repo = this.userRepository;
+    const user = await repo.findByEmail(email);
+
+    if (!user) {
+      return new Error("User not found");
+    }
+
+    if (user.password !== password) {
+      return new Error("Invalid password");
+    }
+
+    return user;
+  }
 }

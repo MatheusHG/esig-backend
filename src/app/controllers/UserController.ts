@@ -29,6 +29,25 @@ class UserController {
 
     return response.status(200).json({ message: 'OK', data: result });
   }
+
+  async login(request: Request, response: Response) {
+    const { email, password } = request.body;
+
+    if(!email || !password) {
+      return response.status(400).json({ message: 'Missing fields' });
+    }
+
+    const userRepository = new UserRepository(AppDataSource);
+    const service = new UserService(userRepository);
+
+    const result = await service.login(email, password);
+
+    if (result instanceof Error) {
+      return response.status(400).json({ message: result.message });
+    }
+
+    return response.status(200).json({ message: 'OK', data: result });
+  }
 };
 
 export default new UserController();
