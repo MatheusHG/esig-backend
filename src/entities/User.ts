@@ -1,6 +1,7 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryColumn, BeforeInsert } from "typeorm";
 import { v4 as uuid } from 'uuid';
 import { UserType } from "./UserType";
+import bcrypt from 'bcrypt';
 
 @Entity("users")
 export class User {
@@ -36,8 +37,13 @@ export class User {
   updated_at: Date;
 
   constructor() {
-    if(!this.id) {
+    if (!this.id) {
       this.id = uuid();
     }
+  }
+
+  @BeforeInsert()
+  async encryptPassword() {
+    this.password = await bcrypt.hash(this.password, 10);
   }
 }

@@ -4,7 +4,7 @@ import { UserRepository } from "../repositories/UserRepository";
 import AppDataSource from "../../database/index";
 
 class UserController {
-  async handle(request: Request, response: Response) {
+  async create(request: Request, response: Response) {
     const { name, email, telephone, cpf, password, type_id } = request.body;
 
     if(!name || !email || !telephone || !cpf || !password || !type_id) {
@@ -47,6 +47,24 @@ class UserController {
     }
 
     return response.status(200).json({ message: 'OK', data: result });
+  }
+
+  async findById(request: Request, response: Response) {
+    const { id } = request.params;
+
+    if(!id) {
+      return response.status(400).json({ message: 'Missing fields' });
+    }
+
+    const userRepository = new UserRepository(AppDataSource);
+    const user = await userRepository.findById(id);
+
+    if (!user) {
+      return response.status(404).json({ message: 'User not found' });
+    }
+    user.password = undefined;
+
+    return response.status(200).json({ message: 'OK', data: user });
   }
 };
 
