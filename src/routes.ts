@@ -5,7 +5,7 @@ import authMiddleware from './middlewares/auth';
 
 const router = Router();
 
-router.get('/health', (req, res) => {
+router.get('/', (req, res) => {
     res.status(200).json({ status: 'ok' });
 });
 
