@@ -23,4 +23,8 @@ export class UserRepository {
   async findById(id: string): Promise<User | null> {
     return await this.repo.findOne({ where: { id } });
   }
+
+  async findAll(): Promise<User[]> {
+    return await this.repo.find();
+  }
 }

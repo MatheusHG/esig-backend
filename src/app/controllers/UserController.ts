@@ -66,6 +66,21 @@ class UserController {
 
     return response.status(200).json({ message: 'OK', data: user });
   }
+
+  async findByAll(request: Request, response: Response) {
+    const userRepository = new UserRepository(AppDataSource);
+    const users = await userRepository.findAll();
+
+    if (!users) {
+      return response.status(404).json({ message: 'Nenhum usuário encontrado' });
+    }
+
+    users.forEach(user => {
+      user.password = undefined;
+    });
+
+    return response.status(200).json({ message: 'OK', data: users });
+  }
 };
 
 export default new UserController();
