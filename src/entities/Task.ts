@@ -14,6 +14,9 @@ export class Task {
   @Column()
   description: string;
 
+  @Column({ nullable: true, default: "to_do" })
+  status: string;
+
   @Column()
   priority: string;
 

@@ -31,7 +31,9 @@ router.get('/type', UserTypeController.findAll);
 
 router.post('/project', ProjectController.create);
 router.get('/project', ProjectController.findAll);
-
 router.post('/project/task', upload.single('file'), TaskController.create);
+
+router.get('/overview', TaskController.overview);
+
 
 export default router;

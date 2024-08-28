@@ -22,6 +22,11 @@ export class Task1724812982085 implements MigrationInterface {
             type: "varchar"
           },
           {
+            name: "status",
+            type: "varchar",
+            default: "to_do"
+          },
+          {
             name: "priority",
             type: "varchar"
           },

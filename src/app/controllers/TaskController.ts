@@ -63,6 +63,17 @@ class TaskController {
 
     return response.status(200).json({ message: 'OK', data: result });
   }
+
+  async overview(request: Request, response: Response) {
+    const taskRepository = new TaskRepository(AppDataSource);
+    const projectRepository = new ProjectRepository(AppDataSource);
+    const userRepository = new UserRepository(AppDataSource);
+    const service = new TaskService(taskRepository, projectRepository, userRepository);
+
+    const result = await service.overview();
+
+    return response.status(200).json({ message: 'OK', data: result });
+  }
 }
 
 export default new TaskController();

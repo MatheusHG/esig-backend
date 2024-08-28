@@ -6,6 +6,7 @@ import { UserRepository } from "../repositories/UserRepository";
 type TaskRequest = {
   name: string;
   description: string;
+  status?: string;
   priority: string;
   deadline: Date;
   urlFile: string | null;
@@ -42,5 +43,18 @@ export class TaskService {
 
   async findAll(): Promise<Task[]> {
     return this.taskRepository.findAll();
+  }
+
+  async overview(): Promise<any> {
+    const data = await this.taskRepository.findAll();
+    return {
+      to_do: data.filter((task) => task.status === 'to_do').length,
+      doing: data.filter((task) => task.status === 'doing').length,
+      done: data.filter((task) => task.status === 'done').length,
+      task_delayed: {
+        to_do: data.filter((task) => task.deadline < new Date() && task.status === 'to_do').length,
+        doing: data.filter((task) => task.deadline < new Date() && task.status === 'doing').length,
+      }
+    }
   }
 }
