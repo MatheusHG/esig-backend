@@ -11,14 +11,18 @@
     "typeorm": "ts-node-dev node_modules/typeorm/cli.js",
     "migration:create:users": "typeorm migration:create src/database/migrations/CreateUsers",
     "migration:create:usertype": "typeorm migration:create src/database/migrations/UserType",
+    "migration:create:task": "typeorm migration:create src/database/migrations/Task",
+    "migration:create:project": "typeorm migration:create src/database/migrations/Project",
     "migration:run": "typeorm -- -d src/database/index.ts migration:run",
     "migration:revert": "typeorm migration:revert"
   },
   "dependencies": {
+    "aws-sdk": "^2.1684.0",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
     "pg": "^8.12.0",
     "reflect-metadata": "^0.2.2",
     "typeorm": "^0.3.20",
@@ -28,6 +32,7 @@
     "@types/bcrypt": "^5.0.2",
     "@types/express": "^4.17.21",
     "@types/jsonwebtoken": "^9.0.6",
+    "@types/multer": "^1.4.12",
     "@types/uuid": "^10.0.0",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.5.4"

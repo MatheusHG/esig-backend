@@ -4,6 +4,10 @@ import { UserType1724673366564 } from './migrations/1724673366564-UserType';
 import { CreateUsers1724673355604 } from './migrations/1724673355604-CreateUsers';
 import { User } from '../entities/User';
 import { UserType } from '../entities/UserType';
+import { Project1724813171513 } from './migrations/1724813171513-Project';
+import { Task1724812982085 } from './migrations/1724812982085-Task';
+import { Project } from '../entities/Project';
+import { Task } from '../entities/Task';
 
 const options: PostgresConnectionOptions = {
   type: 'postgres',
@@ -14,9 +18,8 @@ const options: PostgresConnectionOptions = {
   database: 'esigchallenge',
   synchronize: true,
   logging: false,
-  // migrations: ['src/database/migrations/*.ts'],
-  migrations: [UserType1724673366564, CreateUsers1724673355604],
-  entities: [User, UserType],
+  migrations: [Task1724812982085, Project1724813171513, UserType1724673366564, CreateUsers1724673355604],
+  entities: [Task, Project, User, UserType],
   subscribers: [],
   ssl: {
     rejectUnauthorized: true,

@@ -1,13 +1,13 @@
 import { Column, Entity, PrimaryColumn } from "typeorm";
 import { v4 as uuid } from 'uuid';
 
-@Entity("usersTypes")
-export class UserType {
+@Entity("projects")
+export class Project {
   @PrimaryColumn()
   id: string;
   
   @Column()
-  type: string;
+  name: string;
 
   constructor() {
     if(!this.id) {

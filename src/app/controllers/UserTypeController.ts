@@ -4,7 +4,7 @@ import { UserTypeRepository } from "../repositories/UserTypeRepository";
 import { UserTypeService } from "../services/UserTypeService";
 
 class UserTypeController {
-  async handle(request: Request, response: Response) {
+  async create(request: Request, response: Response) {
     const { type } = request.body;
 
     if(!type) {
