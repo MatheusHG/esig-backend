@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryColumn, BeforeInsert } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, PrimaryColumn, BeforeInsert, ManyToOne } from "typeorm";
 import { v4 as uuid } from 'uuid';
 import { UserType } from "./UserType";
 import bcrypt from 'bcrypt';
@@ -26,7 +26,7 @@ export class User {
   @Column()
   type_id: string;
 
-  @OneToOne(() => UserType)
+  @ManyToOne(() => UserType)
   @JoinColumn({ name: "type_id" })
   type: UserType;
 
