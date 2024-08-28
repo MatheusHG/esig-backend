@@ -7,7 +7,12 @@ import TaskController from './app/controllers/TaskController';
 import multer from 'multer';
 
 const router = Router();
-const upload = multer();
+const upload = multer({
+    storage: multer.memoryStorage(),
+    limits: {
+      fileSize: 5 * 1024 * 1024, // limit file size to 5MB
+    },
+  });
 
 router.get('/', (req, res) => {
     res.status(200).json({ status: 'ok' });
