@@ -34,7 +34,7 @@ class UserController {
     const { email, password } = request.body;
 
     if(!email || !password) {
-      return response.status(400).json({ message: 'Missing fields' });
+      return response.status(400).json({ message: 'Email e Senha obrigatórios' });
     }
 
     const userRepository = new UserRepository(AppDataSource);
@@ -53,14 +53,14 @@ class UserController {
     const { id } = request.params;
 
     if(!id) {
-      return response.status(400).json({ message: 'Missing fields' });
+      return response.status(400).json({ message: 'Id obrigatório' });
     }
 
     const userRepository = new UserRepository(AppDataSource);
     const user = await userRepository.findById(id);
 
     if (!user) {
-      return response.status(404).json({ message: 'User not found' });
+      return response.status(404).json({ message: 'Credenciais inválidas' });
     }
     user.password = undefined;
 

@@ -1,20 +1,24 @@
-function cors(request, response, next) {
-  // const allowedOrigins = [
-  //   '*',
-  //   'http://localhost:3000',
-  // ];
+function cors(req, res, next) {
+  const allowedOrigins = [
+    '*'
+  ];
 
-  // const origin = request.get('origin');
-  // const isAllowed = allowedOrigins.includes(origin);
+  const origin = req.get('origin');
+  const isAllowed = allowedOrigins.includes(origin) || allowedOrigins.includes('*');
 
-  // if (isAllowed) {
-  response.setHeader('Access-Control-Allow-Origin', '*');
-  response.setHeader('Access-Control-Allow-Methods', '*');
-  response.setHeader('Access-Control-Allow-Headers', '*');
-  response.setHeader('Header-Control-Max-Age', '-1');
-  // }
+  if (isAllowed) {
+    res.setHeader('Access-Control-Allow-Origin', origin || '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    res.setHeader('Access-Control-Max-Age', '3600'); // Tempo em segundos
+
+    if (req.method === 'OPTIONS') {
+      res.sendStatus(204);
+      return;
+    }
+  }
 
   next();
-};
+}
 
 export default cors;

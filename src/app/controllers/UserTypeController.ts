@@ -8,7 +8,7 @@ class UserTypeController {
     const { type } = request.body;
 
     if(!type) {
-      return response.status(400).json({ message: 'Missing fields' });
+      return response.status(400).json({ message: 'Type obrigatório' });
     }
 
     const userTypeRepository = new UserTypeRepository(AppDataSource);
