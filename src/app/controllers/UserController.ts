@@ -31,7 +31,7 @@ class UserController {
   }
 
   async login(request: Request, response: Response) {
-    const { email, password } = request.body;
+    const { email, password, rememberMe } = request.body;
 
     if(!email || !password) {
       return response.status(400).json({ message: 'Email e Senha obrigatórios' });
@@ -40,7 +40,7 @@ class UserController {
     const userRepository = new UserRepository(AppDataSource);
     const service = new UserService(userRepository);
 
-    const result = await service.login(email, password);
+    const result = await service.login(email, password, rememberMe);
 
     if (result instanceof Error) {
       return response.status(400).json({ message: result.message });

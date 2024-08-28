@@ -33,7 +33,7 @@ export class UserService {
     };
   }
 
-  async login(email: string, password: string): Promise<LoginResponse | Error> {
+  async login(email: string, password: string, rememberMe?: boolean): Promise<LoginResponse | Error> {
     const repo = this.userRepository;
     const user = await repo.findByEmail(email);
 
@@ -48,7 +48,7 @@ export class UserService {
     user.password = undefined;
     return {
       user,
-      token: await this.generateToken(user)
+      token: await this.generateToken(user, rememberMe)
     };
   }
 
@@ -56,9 +56,9 @@ export class UserService {
     return this.userRepository.findById(id);
   }
 
-  async generateToken(user: User): Promise<string> {
+  async generateToken(user: User, rememberMe?: boolean): Promise<string> {
     return jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-      expiresIn: 86400
+      expiresIn: rememberMe ? '7d' : '1d'
     });
   }
 }
