@@ -1,4 +1,5 @@
 import { S3 } from 'aws-sdk';
+require("aws-sdk/lib/maintenance_mode_message").suppress = true;
 
 export class UploadFileService {
   async upload(file: Express.Multer.File, key: string) {
