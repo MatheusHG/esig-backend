@@ -5,6 +5,7 @@ import { UserRepository } from "../repositories/UserRepository";
 
 type TaskRequest = {
   name: string;
+  description: string;
   priority: string;
   deadline: Date;
   urlFile: string | null;

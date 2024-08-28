@@ -10,6 +10,7 @@ export class UploadFileService {
         Bucket: process.env.AWS_BUCKET_NAME,
         Body: file.buffer,
         Key: encodeURI(key),
+        ContentType: file.mimetype
       })
       .promise();
 

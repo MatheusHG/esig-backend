@@ -9,10 +9,10 @@ import { v4 as uuid } from 'uuid';
 
 class TaskController {
   async create(request: Request, response: Response) {
-    const { name, priority, deadline, projectId, userId } = request.body;
+    const { name, description, priority, deadline, projectId, userId } = request.body;
     const requestImages = request.file as Express.Multer.File;
     
-    if (!name || !priority || !deadline || !projectId) {
+    if (!name || !description || !priority || !deadline || !projectId) {
       return response.status(400).json({ message: 'Preencha todos os campos' });
     }
 
@@ -28,7 +28,7 @@ class TaskController {
     let fileName = null;
     if(requestImages) {
       const serviceS3 = new UploadFileService();
-      fileName = serviceS3.upload(requestImages, `${uuid()}-${requestImages.originalname}`);
+      fileName = await serviceS3.upload(requestImages, `${uuid()}-${requestImages.originalname}`);
     }
 
     const taskRepository = new TaskRepository(AppDataSource);
@@ -38,6 +38,7 @@ class TaskController {
 
     const result = await service.execute({ 
       name,
+      description,
       priority,
       deadline,
       urlFile: fileName,

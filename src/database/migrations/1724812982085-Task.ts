@@ -18,6 +18,10 @@ export class Task1724812982085 implements MigrationInterface {
             type: "varchar"
           },
           {
+            name: "description",
+            type: "varchar"
+          },
+          {
             name: "priority",
             type: "varchar"
           },
