@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev --env-file=.env --transpile-only --ignore-watch node_modules src/server.ts",
-    "start": "ts-node src/server.ts",
+    "start": "node --max-old-space-size=4096 -r ts-node/register src/server.ts",
     "typeorm": "ts-node-dev node_modules/typeorm/cli.js",
     "migration:create:users": "typeorm migration:create src/database/migrations/CreateUsers",
     "migration:create:usertype": "typeorm migration:create src/database/migrations/UserType",
