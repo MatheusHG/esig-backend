@@ -5,6 +5,10 @@ import authMiddleware from './middlewares/auth';
 
 const router = Router();
 
+router.get('/health', (req, res) => {
+    res.status(200).json({ status: 'ok' });
+});
+
 router.post('/user/create', UserController.create);
 router.post('/user/authenticate', UserController.login);
 
