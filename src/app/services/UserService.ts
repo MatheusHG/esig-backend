@@ -38,11 +38,11 @@ export class UserService {
     const user = await repo.findByEmail(email);
 
     if (!user) {
-      return new Error("User not found");
+      return new Error("Credenciais inválidas");
     }
 
     if (!await bcrypt.compare(password, user.password)) {
-      return new Error("Invalid password");
+      return new Error("Credenciais inválidas");
     }
 
     user.password = undefined;
