@@ -58,8 +58,9 @@ class TaskController {
     const projectRepository = new ProjectRepository(AppDataSource);
     const userRepository = new UserRepository(AppDataSource);
     const service = new TaskService(taskRepository, projectRepository, userRepository);
+    const idUser = request.body.userId;
 
-    const result = await service.findAll();
+    const result = await service.findByUserAll(idUser);
 
     return response.status(200).json({ message: 'OK', data: result });
   }
@@ -69,8 +70,9 @@ class TaskController {
     const projectRepository = new ProjectRepository(AppDataSource);
     const userRepository = new UserRepository(AppDataSource);
     const service = new TaskService(taskRepository, projectRepository, userRepository);
+    const idUser = request.body.userId;
 
-    const result = await service.overview();
+    const result = await service.overview(idUser);
 
     return response.status(200).json({ message: 'OK', data: result });
   }

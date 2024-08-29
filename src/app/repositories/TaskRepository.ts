@@ -24,6 +24,10 @@ export class TaskRepository {
     return await this.repo.findOne({ where: { id } });
   }
 
+  async findByUserAll(id: string): Promise<Task[]> {
+    return await this.repo.find({ where: { responsibleUser: id } });
+  }
+
   async findAll(): Promise<Task[]> {
     return await this.repo.find();
   }

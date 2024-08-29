@@ -20,7 +20,7 @@ export class UserService {
     const existingUser = await repo.findByEmail(data.email);
 
     if (existingUser) {
-      return new Error("User already exists");
+      return new Error("Usuário já existe");
     }
 
     const newUser = repo.create(data);

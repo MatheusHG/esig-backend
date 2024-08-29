@@ -45,8 +45,12 @@ export class TaskService {
     return this.taskRepository.findAll();
   }
 
-  async overview(): Promise<any> {
-    const data = await this.taskRepository.findAll();
+  async findByUserAll(idUser: string): Promise<Task[]> {
+    return this.taskRepository.findByUserAll(idUser);
+  }
+
+  async overview(idUser: string): Promise<any> {
+    const data = await this.taskRepository.findByUserAll(idUser);
     return {
       to_do: data.filter((task) => task.status === 'to_do').length,
       doing: data.filter((task) => task.status === 'doing').length,
